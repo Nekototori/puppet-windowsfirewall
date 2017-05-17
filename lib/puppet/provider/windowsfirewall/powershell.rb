@@ -1,7 +1,7 @@
 Puppet::Type.type(:windowsfirewall).provide(:powershell) do
   confine :operatingsystem => :windows
-  confine :kernelmajorversion do |kernelversion|
-    kernelversion >= 6.2
+  confine do
+    Facter.value('kernelmajorversion') >= 6.2
   end
 
   commands :powershell =>
