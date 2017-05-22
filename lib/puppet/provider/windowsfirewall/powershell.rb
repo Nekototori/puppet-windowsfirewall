@@ -92,7 +92,7 @@ Puppet::Type.type(:windowsfirewall).provide(:powershell) do
     output.each do | line|
       key, val      = line.split(':')
       property_name = method_map.key(key.strip)
-      hash_of_properties[property_name.intern] = val.strip.chomp
+      hash_of_properties[property_name.to_sym] = val.strip.chomp
     end
     hash_of_properties[:name]     = zone
     hash_of_properties[:ensure]   = hash_of_properties[:ensure] == 'True' ? :present : :absent
@@ -108,7 +108,7 @@ Puppet::Type.type(:windowsfirewall).provide(:powershell) do
   # Dynamically create setter methods from the method_map above
   method_map.keys.each do |key|
     define_method("#{key}=") do |value|
-      @property_flush[key.intern] = value
+      @property_flush[key.to_sym] = value
     end
   end
 
