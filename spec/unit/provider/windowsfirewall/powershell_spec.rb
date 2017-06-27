@@ -10,3 +10,7 @@ describe provider_class do
     it { is_expected.to eq ['windows'] }
   end
 end
+
+def create
+  args = build_arguments_for_powershell('create')
+end
